@@ -57,6 +57,13 @@ class Song
     sql = "SELECT * FROM #{self.table_name} WHERE name = '#{name}'"
     DB[:conn].execute(sql)
   end
+    def self.find_by(hash)
+    column=hash.keys[0].to_s
+    value=hash.values[0]
+
+    sql = "SELECT * FROM #{self.table_name} WHERE #{column} = ?"
+    DB[:conn].execute(sql, value)
+  end
 
 end
 
